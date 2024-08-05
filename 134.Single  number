@@ -1,0 +1,26 @@
+136. Single Number
+
+Given a non-empty array of integers nums, every element appears twice except for one. Find that single one.
+You must implement a solution with a linear runtime complexity and use only constant extra space.
+class Solution {
+    public int singleNumber(int[] nums) {
+        int value=0;
+        for(int i=0;i<nums.length;i++){
+            value=value^nums[i];
+        }
+        return value;
+    }
+}
+
+->Properties of XOR:
+a ^ a = 0 (any number XORed with itself is 0)
+a ^ 0 = a (any number XORed with 0 remains the same)
+XOR is commutative and associative, meaning the order of operations doesn't change the result.
+For our array {2, 4, 2, 4, 5}, the XOR operation proceeds as follows:
+value = 0 ^ 2 → value = 2
+value = 2 ^ 4 → value = 6
+value = 6 ^ 2 → value = 4
+value = 4 ^ 4 → value = 0
+value = 0 ^ 5 → value = 5
+After completing the loop, value holds the result 5, which is the unique number in the array.
+return value;
