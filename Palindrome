@@ -1,0 +1,26 @@
+public class ex {
+    public static void main(String[] args) {
+        String str="madam";
+       // char ch[]=str.toCharArray();
+
+        int i=0;
+        int j=str.length()-1;
+        boolean isPalindrome= true;
+        while(i<=j){
+            if(str.charAt(i)==str.charAt(j)){
+                i++;
+                j--; 
+            }
+            else{
+                isPalindrome=false;
+                break;
+            }
+        }
+        if(isPalindrome){
+            System.out.println("true");
+        }
+        else{
+            System.out.println("false");
+        }
+    }
+}
