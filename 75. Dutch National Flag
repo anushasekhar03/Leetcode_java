@@ -1,0 +1,93 @@
+You are given an array nums consisting of integers 0, 1, and 2. Your task is to sort the array in-place, so that all the 0s come first, followed by all the 1s, 
+and then all the 2s. You must solve this problem in linear time and with constant extra space.
+#CODE
+public class Solution {
+    public void sortColors(int[] nums) {
+        // Three pointers: start, mid, and end
+        int start = 0, mid = 0, end = nums.length - 1;
+
+        // Traverse the array until mid goes beyond end
+        while (mid <= end) {
+            if (nums[mid] == 0) {
+                // If current element is 0, swap it with the element at start
+                swap(nums, start, mid);
+                start++;  // Move start to the right
+                mid++;    // Move mid to the right
+            } else if (nums[mid] == 1) {
+                // If current element is 1, just move mid to the right
+                mid++;
+            } else if (nums[mid] == 2) {
+                // If current element is 2, swap it with the element at end
+                swap(nums, mid, end);
+                end--;    // Move end to the left, but don't move mid yet
+            }
+        }
+    }
+    // Swap function to exchange two elements in the array
+    private void swap(int[] nums, int i, int j) {
+        int temp = nums[i];  // Store value at index i
+        nums[i] = nums[j];   // Place value from index j into index i
+        nums[j] = temp;      // Put stored value into index j
+    }
+}
+
+#DRY- RUN
+Let's dry run the code with the given array nums = {2, 0, 2, 1, 1, 0, 1, 0, 1, 0} step by step.
+Initial Values:
+
+nums = {2, 0, 2, 1, 1, 0, 1, 0, 1, 0}
+start = 0, mid = 0, end = 9 (index of the last element)
+Step-by-step Execution:
+First Iteration:
+
+mid = 0, nums[mid] = 2
+Swap nums[mid] with nums[end]: swap(nums[0], nums[9])
+Array becomes: {0, 0, 2, 1, 1, 0, 1, 0, 1, 2}
+Decrease end to 8, keep mid unchanged.
+Second Iteration:
+
+mid = 0, nums[mid] = 0
+Swap nums[mid] with nums[start]: swap(nums[0], nums[0]) (no change)
+Array remains: {0, 0, 2, 1, 1, 0, 1, 0, 1, 2}
+Increase start to 1, increase mid to 1.
+Third Iteration:
+
+mid = 1, nums[mid] = 0
+Swap nums[mid] with nums[start]: swap(nums[1], nums[1]) (no change)
+Array remains: {0, 0, 2, 1, 1, 0, 1, 0, 1, 2}
+Increase start to 2, increase mid to 2.
+Fourth Iteration:
+
+mid = 2, nums[mid] = 2
+Swap nums[mid] with nums[end]: swap(nums[2], nums[8])
+Array becomes: {0, 0, 1, 1, 1, 0, 1, 0, 2, 2}
+Decrease end to 7, keep mid unchanged.
+Fifth Iteration:
+
+mid = 2, nums[mid] = 1
+No swap, just increase mid to 3.
+Sixth Iteration:
+
+mid = 3, nums[mid] = 1
+No swap, just increase mid to 4.
+Seventh Iteration:
+
+mid = 4, nums[mid] = 1
+No swap, just increase mid to 5.
+Eighth Iteration:
+
+mid = 5, nums[mid] = 0
+Swap nums[mid] with nums[start]: swap(nums[5], nums[2])
+Array becomes: {0, 0, 0, 1, 1, 1, 1, 0, 2, 2}
+Increase start to 3, increase mid to 6.
+Ninth Iteration:
+
+mid = 6, nums[mid] = 1
+No swap, just increase mid to 7.
+Tenth Iteration:
+
+mid = 7, nums[mid] = 0
+Swap nums[mid] with nums[start]: swap(nums[7], nums[3])
+Array becomes: {0, 0, 0, 0, 1, 1, 1, 1, 2, 2}
+Increase start to 4, increase mid to 8.
+The loop ends when mid exceeds end.
